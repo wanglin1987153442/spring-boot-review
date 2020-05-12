@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "serve.ssl.key-alias",
+      "type": "java.lang.String",
+      "description": "Description for serve.ssl.key-alias."
+  }
+] }
