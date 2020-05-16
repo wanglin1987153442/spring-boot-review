@@ -1,6 +1,6 @@
 package com.soft1851.spring.boot.jpa.repository;
 
-import com.soft1851.spring.boot.jpa.model.Teacher;
+
 import com.soft1851.spring.boot.jpa.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
