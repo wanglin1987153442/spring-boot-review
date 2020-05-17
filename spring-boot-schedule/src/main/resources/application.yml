@@ -9,9 +9,9 @@ spring:
     default-encoding: UTF-8
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: ENC(ilwRFkN3mzAdt9xycTPn/w==)
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
@@ -20,3 +20,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+jasypt:
+    encryptor:
+      #这里可以理解成是加解密的时候使用的密钥
+      password: wlecyil
