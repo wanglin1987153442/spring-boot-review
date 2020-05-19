@@ -1,5 +1,6 @@
 package com.soft1851.spring.boot.schedule.service.servicimpl;
 
+import cn.hutool.core.io.FileUtil;
 import com.soft1851.spring.boot.schedule.model.Cron;
 import com.soft1851.spring.boot.schedule.repository.CronRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,5 +31,8 @@ public class AsyncTaskService1 {
         Cron cron= cronRepository.findCronByCronIdEquals(1);
         log.info(String.valueOf(cron));
         cronRepository.updateCron(cron.getCron(),cron.getCronId());
+
     }
+
+
 }

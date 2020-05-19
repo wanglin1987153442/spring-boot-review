@@ -32,4 +32,14 @@ public class Cron {
 
     @Column(name = "cron",nullable = false,length = 50)
     private String cron;
+
+
+    @Column(name = "img")
+    private String img;
+
+
+    @Column(name = "github")
+    private String github;
+
+
 }

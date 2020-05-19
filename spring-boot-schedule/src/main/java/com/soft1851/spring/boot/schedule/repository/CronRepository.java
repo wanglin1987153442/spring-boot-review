@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * @author wl
@@ -23,6 +25,8 @@ public interface CronRepository extends JpaRepository<Cron, Integer> {
      * @return
      */
     Cron findCronByCronIdEquals(int cronId);
+
+
 
     /**
      * 修改cron

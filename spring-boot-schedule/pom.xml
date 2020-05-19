@@ -19,7 +19,24 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.5</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+
+
+        <!--quartz依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
         <!--邮箱 依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,6 +52,7 @@
             <artifactId>jasypt-spring-boot-starter</artifactId>
             <version>1.18</version>
         </dependency>
+
 
 
         <!--MySQL驱动，默认为8-->

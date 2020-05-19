@@ -1,15 +1,25 @@
 package com.soft1851.spring.boot.schedule.controller;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
+import cn.hutool.extra.qrcode.QrConfig;
+import cn.hutool.http.HttpUtil;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.soft1851.spring.boot.schedule.model.Cron;
 import com.soft1851.spring.boot.schedule.repository.CronRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
+import java.awt.*;
+import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 
 /**
@@ -71,10 +81,47 @@ public class MyTaskController {
         return "修改定时任务设置";
     }
 
-    private static class MyRunnable implements Runnable {
+    private class MyRunnable implements Runnable {
         @Override
         public void run() {
-           log.info("做任何事情");
+
+            List<Cron> crons = cronRepository.findAll();
+
+            int index = RandomUtil.randomInt(0, crons.size());
+            log.info(String.valueOf(index));
+            Cron cron = crons.get(index);
+            download(cron);
         }
+    }
+
+
+    @Async
+    public void download(Cron cron) {
+        String template = "F:/test/{}.jpg";
+        String path = StrUtil.format(template, IdUtil.simpleUUID());
+        log.info(path);
+//将文件下载后保存在E盘，返回结果为下载文件大小
+        long l = HttpUtil.downloadFile(cron.getImg(), FileUtil.file(path));
+
+        getErWeiMa(cron);
+    }
+
+    @Async
+    public void getErWeiMa(Cron cron) {
+        QrConfig config = new QrConfig(300, 300);
+// 设置边距，既二维码和背景之间的边距
+        config.setMargin(3);
+// 设置前景色，既二维码颜色（青色）
+        config.setForeColor(Color.CYAN.getRGB());
+// 设置背景色（灰色）
+        config.setBackColor(Color.GRAY.getRGB());
+        config.setErrorCorrection(ErrorCorrectionLevel.H);
+        String template = "F:/test/{}.jpg";
+        String path = StrUtil.format(template, IdUtil.simpleUUID());
+
+// 生成二维码到文件，也可以到流
+        QrCodeUtil.generate(cron.getGithub(), config, FileUtil.file(path));
+
+
     }
 }
